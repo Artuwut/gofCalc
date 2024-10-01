@@ -1,6 +1,6 @@
 {
   "name": "godofloot",
-  "productName": "godofloot",
+  "productName": "God of Loot",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": "src/index.js",
@@ -18,8 +18,8 @@
   "publish": [
     {
       "provider": "github",
-      "owner": "artuwut",
-      "repo": "godofloot"
+      "owner": "Artuwut",
+      "repo": "gofCalc"
     }
   ],
   "devDependencies": {
@@ -31,7 +31,7 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
     "@electron-forge/plugin-fuses": "^7.5.0",
     "@electron/fuses": "^1.8.0",
-    "electron": "32.1.2",
+    "electron": "^32.1.2",
     "electron-reload": "^2.0.0-alpha.1"
   },
   "keywords": [],

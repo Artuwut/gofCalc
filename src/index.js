@@ -1,17 +1,19 @@
-// Add this at the top to enable reloading during development
-require('electron-reload')(__dirname);
-
-// Import necessary modules from Electron and Node.js
 const { app, BrowserWindow } = require('electron');
-const path = require('node:path');
+const path = require('path');
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
-  app.quit();
+// Use electron-reload only in development mode
+if (process.env.NODE_ENV !== 'production') {
+  try {
+    require('electron-reload')(path.join(__dirname, 'index.js'), {
+      // Reload when any files in the current directory change
+      electron: require(`${__dirname}/node_modules/electron`)
+    });
+  } catch (err) {
+    console.error('Failed to load electron-reload', err);
+  }
 }
 
-const createWindow = () => {
-  // Create the browser window.
+function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -20,29 +22,19 @@ const createWindow = () => {
     },
   });
 
-  // Load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
+}
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
-};
+app.whenReady().then(createWindow);
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-app.whenReady().then(() => {
-  createWindow();
-
-  // On macOS, re-create a window if the dock icon is clicked and no windows are open.
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
-});
-
-// Quit when all windows are closed, except on macOS.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
+  }
+});
+
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
   }
 });
