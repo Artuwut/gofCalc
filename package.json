@@ -13,13 +13,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/artuwut/godofloot.git"
+    "url": "git+https://github.com/Artuwut/gofCalc.git"
   },
   "publish": [
     {
       "provider": "github",
       "owner": "artuwut",
-      "repo": "golCalc"
+      "repo": "godofloot"
     }
   ],
   "devDependencies": {
